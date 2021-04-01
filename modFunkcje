@@ -1,0 +1,18 @@
+Option Compare Database
+Option Explicit
+
+Private Const CurrentModName = "modFunkcje"
+
+Public Function PtrToObject(ByVal iObj As Long) As Object
+    Dim nObj As Object
+
+    If VarType(iObj) = vbLong Then
+        CopyMemory nObj, CLng(iObj), 4
+    Else
+        Exit Function
+    End If
+
+    Set PtrToObject = nObj
+
+    CopyMemory nObj, 0&, 4
+End Function
