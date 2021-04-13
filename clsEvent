@@ -1,4 +1,27 @@
 Option Compare Database
 Option Explicit
 
-'clsEvent
+Private Const CurrentModeName = "clsEvent"
+
+Private Enum cEvent
+    BeforEvent = 1
+    AfterEvent = 2
+End Enum
+
+Public Event Befor()
+Public Event After()
+
+Private Sub Class_Initialize()
+    'constructor
+End Sub
+
+Public Sub EventsProcedure(iEvent As Single)
+    Debug.Print "iEvent => " & iEvent
+    
+    Select Case iEvent
+    Case cEvent.BeforEvent
+        RaiseEvent Befor
+    Case cEvent.AfterEvent
+        RaiseEvent After
+    End Select
+End Sub
