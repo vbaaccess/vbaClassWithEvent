@@ -1,4 +1,38 @@
 Option Compare Database
 Option Explicit
 
-'clsMain
+Private Const CurrentModeName = "clsMain"
+
+Private Enum cEvent
+    BeforEvent = 1
+    AfterEvent = 2
+End Enum
+
+Private Sub Class_Initialize()
+    'constructor
+    Set objEvent = New clsEvent
+End Sub
+
+Private Sub Class_Terminate()
+    'Destruktor
+End Sub
+
+Public Property Get EventsMomoryPointer() As Long
+    EventsMomoryPointer = CLng(CStr(ObjPtr(objEvent)))
+End Property
+
+Public Sub SomeProcedure()
+    Call objEvent.EventsProcedure(cEvent.BeforEvent)
+    'your procedure
+    Call objEvent.EventsProcedure(cEvent.AfterEvent)
+End Sub
+
+'--- call exampel --- --- ---
+Private Sub objEvent_Befor()
+  'your event befor
+End Sub
+
+Private Sub objEvent_After()
+  'your event after
+End Sub
+'--- ------------ --- --- ---
